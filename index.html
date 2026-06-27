@@ -624,6 +624,36 @@ section>*{position:relative;z-index:1}
   color:var(--gold);opacity:.3;letter-spacing:8px;
   position:relative;z-index:1;
 }
+
+/* ── BACKGROUND DEPTH ORBS ────────────── */
+.bg-orb{
+  position:absolute;border-radius:50%;
+  pointer-events:none;z-index:0;
+  filter:blur(clamp(50px,14vw,80px));
+  will-change:transform,opacity;
+  mix-blend-mode:screen;
+}
+@keyframes orbFloat1{
+  0%,100%{transform:translate(0,0) scale(1)}
+  25%{transform:translate(28px,-22px) scale(1.12)}
+  50%{transform:translate(-18px,32px) scale(.94)}
+  75%{transform:translate(22px,12px) scale(1.06)}
+}
+@keyframes orbFloat2{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(-30px,20px) scale(1.1)}
+  66%{transform:translate(24px,-18px) scale(.9)}
+}
+@keyframes orbFloat3{
+  0%,100%{transform:translate(0,0) scale(.95)}
+  20%{transform:translate(15px,25px) scale(1.08)}
+  40%{transform:translate(-25px,-10px) scale(1)}
+  60%{transform:translate(10px,-30px) scale(1.12)}
+  80%{transform:translate(-20px,15px) scale(.92)}
+}
+@media(prefers-reduced-motion:reduce){
+  .bg-orb{animation:none!important}
+}
   </style>
 </head>
 <body>
@@ -955,6 +985,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('main-content').style.visibility = 'visible';
     heroAnim();
     spawnParticles();
+    initBgOrbs();
     scrollAnims();
     countdown();
     setInterval(countdown, 1000);
@@ -1037,6 +1068,45 @@ function heroAnim() {
   gsap.to('#heroBg', {
     yPercent: 22, ease: 'none',
     scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+  });
+}
+
+/* ── BACKGROUND DEPTH ORBS ────────────────────────── */
+function initBgOrbs() {
+  var orbConfigs = [
+    { sel:'#countdown',  orbs:[{x:'15%',y:'20%',w:180,c:'rgba(155,142,199,.13)',a:'orbFloat1',d:'14s'},{x:'80%',y:'65%',w:140,c:'rgba(100,80,200,.10)',a:'orbFloat2',d:'18s'},{x:'50%',y:'85%',w:100,c:'rgba(180,160,220,.08)',a:'orbFloat3',d:'22s'}] },
+    { sel:'#location',   orbs:[{x:'75%',y:'25%',w:200,c:'rgba(100,70,180,.12)',a:'orbFloat2',d:'16s'},{x:'20%',y:'70%',w:150,c:'rgba(155,142,199,.10)',a:'orbFloat1',d:'20s'}] },
+    { sel:'#calendar',   orbs:[{x:'25%',y:'30%',w:160,c:'rgba(155,142,199,.11)',a:'orbFloat3',d:'15s'},{x:'70%',y:'75%',w:130,c:'rgba(80,60,180,.09)',a:'orbFloat1',d:'19s'}] },
+    { sel:'#itinerary',  orbs:[{x:'80%',y:'40%',w:170,c:'rgba(110,80,200,.11)',a:'orbFloat1',d:'17s'},{x:'15%',y:'80%',w:120,c:'rgba(155,142,199,.08)',a:'orbFloat2',d:'21s'}] },
+    { sel:'#dresscode',  orbs:[{x:'30%',y:'20%',w:150,c:'rgba(155,142,199,.10)',a:'orbFloat2',d:'16s'},{x:'75%',y:'70%',w:180,c:'rgba(90,70,190,.12)',a:'orbFloat3',d:'20s'}] },
+    { sel:'#family',     orbs:[{x:'70%',y:'30%',w:160,c:'rgba(100,80,200,.10)',a:'orbFloat1',d:'18s'},{x:'25%',y:'75%',w:140,c:'rgba(155,142,199,.09)',a:'orbFloat3',d:'22s'}] },
+    { sel:'#gallery',    orbs:[{x:'20%',y:'25%',w:190,c:'rgba(110,80,200,.13)',a:'orbFloat3',d:'15s'},{x:'80%',y:'60%',w:150,c:'rgba(155,142,199,.10)',a:'orbFloat1',d:'19s'},{x:'50%',y:'90%',w:110,c:'rgba(80,60,180,.08)',a:'orbFloat2',d:'23s'}] },
+    { sel:'#rsvp',       orbs:[{x:'75%',y:'35%',w:170,c:'rgba(155,142,199,.11)',a:'orbFloat2',d:'17s'},{x:'20%',y:'70%',w:130,c:'rgba(100,70,180,.09)',a:'orbFloat1',d:'21s'}] },
+    { sel:'#kids-policy',orbs:[{x:'30%',y:'40%',w:140,c:'rgba(155,142,199,.10)',a:'orbFloat1',d:'16s'},{x:'70%',y:'80%',w:160,c:'rgba(90,60,190,.11)',a:'orbFloat3',d:'20s'}] },
+    { sel:'#gifts',      orbs:[{x:'80%',y:'25%',w:180,c:'rgba(100,80,200,.12)',a:'orbFloat3',d:'18s'},{x:'15%',y:'65%',w:140,c:'rgba(155,142,199,.09)',a:'orbFloat2',d:'22s'}] },
+    { sel:'#album',      orbs:[{x:'25%',y:'30%',w:160,c:'rgba(110,80,200,.10)',a:'orbFloat2',d:'17s'},{x:'70%',y:'75%',w:130,c:'rgba(155,142,199,.08)',a:'orbFloat1',d:'21s'}] },
+    { sel:'#footer',     orbs:[{x:'50%',y:'30%',w:200,c:'rgba(155,142,199,.12)',a:'orbFloat1',d:'16s'},{x:'20%',y:'70%',w:150,c:'rgba(80,60,180,.09)',a:'orbFloat3',d:'20s'}] }
+  ];
+  orbConfigs.forEach(function(cfg) {
+    var sec = document.querySelector(cfg.sel);
+    if (!sec) return;
+    cfg.orbs.forEach(function(o) {
+      var el = document.createElement('div');
+      el.className = 'bg-orb';
+      Object.assign(el.style, {
+        left: o.x, top: o.y,
+        width: o.w + 'px', height: o.w + 'px',
+        background: 'radial-gradient(circle,' + o.c + ',' + o.c.replace(/[\d.]+\)$/, '0)') + ')',
+        animation: o.a + ' ' + o.d + ' ease-in-out infinite',
+        animationDelay: '-' + (parseFloat(o.d) * Math.random()).toFixed(1) + 's'
+      });
+      sec.appendChild(el);
+      gsap.to(el, {
+        yPercent: -40 - Math.random() * 30,
+        ease: 'none',
+        scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 1.5 }
+      });
+    });
   });
 }
 
