@@ -390,7 +390,7 @@ section>*{position:relative;z-index:1}
 }
 .itv3-ev{
   font-family:'Cormorant Garamond',serif;font-style:italic;
-  font-size:14px;color:rgba(228,236,244,0.55);
+  font-size:14px;color:rgba(245,240,232,0.55);
   letter-spacing:3px;text-transform:uppercase;line-height:1.5;
   text-indent:3px;
 }
@@ -495,7 +495,7 @@ section>*{position:relative;z-index:1}
   margin-left:clamp(-80px,-22vw,-105px);margin-top:clamp(-112px,-31vw,-147px);
   border-radius:16px;overflow:hidden;
   border:2px solid rgba(201,169,110,.25);
-  box-shadow:0 12px 40px rgba(50,100,155,.22),0 2px 8px rgba(0,0,0,.3);
+  box-shadow:0 12px 40px rgba(180,150,85,.22),0 2px 8px rgba(0,0,0,.3);
   user-select:none;-webkit-user-select:none;
   backface-visibility:hidden;
 }
@@ -545,7 +545,7 @@ section>*{position:relative;z-index:1}
     linear-gradient(180deg,var(--ink2),#0e003d);
 }
 .kp-card{
-  background:linear-gradient(160deg,rgba(34,32,24,.5),rgba(6,14,38,.4));
+  background:linear-gradient(160deg,rgba(34,32,24,.5),rgba(20,18,12,.4));
   border:1px solid var(--card-border);
   border-radius:14px;padding:clamp(28px,7vw,40px) clamp(20px,5vw,28px) clamp(24px,6vw,32px);
   margin-top:clamp(22px,6vw,30px);text-align:center;
@@ -1288,18 +1288,18 @@ function heroAnim() {
 /* ── BACKGROUND DEPTH ORBS ────────────────────────── */
 function initBgOrbs() {
   var orbConfigs = [
-    { sel:'#countdown',  orbs:[{x:'15%',y:'20%',w:180,c:'rgba(201,169,110,.13)',a:'orbFloat1',d:'14s'},{x:'80%',y:'65%',w:140,c:'rgba(40,95,165,.10)',a:'orbFloat2',d:'18s'},{x:'50%',y:'85%',w:100,c:'rgba(100,155,200,.08)',a:'orbFloat3',d:'22s'}] },
-    { sel:'#location',   orbs:[{x:'75%',y:'25%',w:200,c:'rgba(40,90,160,.12)',a:'orbFloat2',d:'16s'},{x:'20%',y:'70%',w:150,c:'rgba(201,169,110,.10)',a:'orbFloat1',d:'20s'}] },
-    { sel:'#calendar',   orbs:[{x:'25%',y:'30%',w:160,c:'rgba(201,169,110,.11)',a:'orbFloat3',d:'15s'},{x:'70%',y:'75%',w:130,c:'rgba(30,80,150,.09)',a:'orbFloat1',d:'19s'}] },
-    { sel:'#itinerary',  orbs:[{x:'80%',y:'40%',w:170,c:'rgba(50,100,170,.11)',a:'orbFloat1',d:'17s'},{x:'15%',y:'80%',w:120,c:'rgba(201,169,110,.08)',a:'orbFloat2',d:'21s'}] },
+    { sel:'#countdown',  orbs:[{x:'15%',y:'20%',w:180,c:'rgba(201,169,110,.13)',a:'orbFloat1',d:'14s'},{x:'80%',y:'65%',w:140,c:'rgba(180,150,80,.10)',a:'orbFloat2',d:'18s'},{x:'50%',y:'85%',w:100,c:'rgba(210,185,120,.08)',a:'orbFloat3',d:'22s'}] },
+    { sel:'#location',   orbs:[{x:'75%',y:'25%',w:200,c:'rgba(170,140,75,.12)',a:'orbFloat2',d:'16s'},{x:'20%',y:'70%',w:150,c:'rgba(201,169,110,.10)',a:'orbFloat1',d:'20s'}] },
+    { sel:'#calendar',   orbs:[{x:'25%',y:'30%',w:160,c:'rgba(201,169,110,.11)',a:'orbFloat3',d:'15s'},{x:'70%',y:'75%',w:130,c:'rgba(150,125,70,.09)',a:'orbFloat1',d:'19s'}] },
+    { sel:'#itinerary',  orbs:[{x:'80%',y:'40%',w:170,c:'rgba(190,160,90,.11)',a:'orbFloat1',d:'17s'},{x:'15%',y:'80%',w:120,c:'rgba(201,169,110,.08)',a:'orbFloat2',d:'21s'}] },
     { sel:'#dresscode',  orbs:[{x:'30%',y:'20%',w:150,c:'rgba(201,169,110,.10)',a:'orbFloat2',d:'16s'},{x:'75%',y:'70%',w:180,c:'rgba(160,135,80,.12)',a:'orbFloat3',d:'20s'}] },
-    { sel:'#family',     orbs:[{x:'70%',y:'30%',w:160,c:'rgba(40,95,165,.10)',a:'orbFloat1',d:'18s'},{x:'25%',y:'75%',w:140,c:'rgba(201,169,110,.09)',a:'orbFloat3',d:'22s'}] },
-    { sel:'#gallery',    orbs:[{x:'20%',y:'25%',w:190,c:'rgba(50,100,170,.13)',a:'orbFloat3',d:'15s'},{x:'80%',y:'60%',w:150,c:'rgba(201,169,110,.10)',a:'orbFloat1',d:'19s'},{x:'50%',y:'90%',w:110,c:'rgba(30,80,150,.08)',a:'orbFloat2',d:'23s'}] },
-    { sel:'#rsvp',       orbs:[{x:'75%',y:'35%',w:170,c:'rgba(201,169,110,.11)',a:'orbFloat2',d:'17s'},{x:'20%',y:'70%',w:130,c:'rgba(40,90,160,.09)',a:'orbFloat1',d:'21s'}] },
-    { sel:'#kids-policy',orbs:[{x:'30%',y:'40%',w:140,c:'rgba(201,169,110,.10)',a:'orbFloat1',d:'16s'},{x:'70%',y:'80%',w:160,c:'rgba(35,78,155,.11)',a:'orbFloat3',d:'20s'}] },
-    { sel:'#gifts',      orbs:[{x:'80%',y:'25%',w:180,c:'rgba(40,95,165,.12)',a:'orbFloat3',d:'18s'},{x:'15%',y:'65%',w:140,c:'rgba(201,169,110,.09)',a:'orbFloat2',d:'22s'}] },
-    { sel:'#album',      orbs:[{x:'25%',y:'30%',w:160,c:'rgba(50,100,170,.10)',a:'orbFloat2',d:'17s'},{x:'70%',y:'75%',w:130,c:'rgba(201,169,110,.08)',a:'orbFloat1',d:'21s'}] },
-    { sel:'#footer',     orbs:[{x:'50%',y:'30%',w:200,c:'rgba(201,169,110,.12)',a:'orbFloat1',d:'16s'},{x:'20%',y:'70%',w:150,c:'rgba(30,80,150,.09)',a:'orbFloat3',d:'20s'}] }
+    { sel:'#family',     orbs:[{x:'70%',y:'30%',w:160,c:'rgba(180,150,80,.10)',a:'orbFloat1',d:'18s'},{x:'25%',y:'75%',w:140,c:'rgba(201,169,110,.09)',a:'orbFloat3',d:'22s'}] },
+    { sel:'#gallery',    orbs:[{x:'20%',y:'25%',w:190,c:'rgba(190,160,90,.13)',a:'orbFloat3',d:'15s'},{x:'80%',y:'60%',w:150,c:'rgba(201,169,110,.10)',a:'orbFloat1',d:'19s'},{x:'50%',y:'90%',w:110,c:'rgba(150,125,70,.08)',a:'orbFloat2',d:'23s'}] },
+    { sel:'#rsvp',       orbs:[{x:'75%',y:'35%',w:170,c:'rgba(201,169,110,.11)',a:'orbFloat2',d:'17s'},{x:'20%',y:'70%',w:130,c:'rgba(170,140,75,.09)',a:'orbFloat1',d:'21s'}] },
+    { sel:'#kids-policy',orbs:[{x:'30%',y:'40%',w:140,c:'rgba(201,169,110,.10)',a:'orbFloat1',d:'16s'},{x:'70%',y:'80%',w:160,c:'rgba(155,130,72,.11)',a:'orbFloat3',d:'20s'}] },
+    { sel:'#gifts',      orbs:[{x:'80%',y:'25%',w:180,c:'rgba(180,150,80,.12)',a:'orbFloat3',d:'18s'},{x:'15%',y:'65%',w:140,c:'rgba(201,169,110,.09)',a:'orbFloat2',d:'22s'}] },
+    { sel:'#album',      orbs:[{x:'25%',y:'30%',w:160,c:'rgba(190,160,90,.10)',a:'orbFloat2',d:'17s'},{x:'70%',y:'75%',w:130,c:'rgba(201,169,110,.08)',a:'orbFloat1',d:'21s'}] },
+    { sel:'#footer',     orbs:[{x:'50%',y:'30%',w:200,c:'rgba(201,169,110,.12)',a:'orbFloat1',d:'16s'},{x:'20%',y:'70%',w:150,c:'rgba(150,125,70,.09)',a:'orbFloat3',d:'20s'}] }
   ];
   orbConfigs.forEach(function(cfg) {
     var sec = document.querySelector(cfg.sel);
