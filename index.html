@@ -1235,6 +1235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.to(envImage, { opacity: 0, duration: 0.55, ease: 'power2.inOut', onComplete: function () { envImage.style.display = 'none'; } });
     gsap.to(envVideo, { opacity: 1, duration: 0.55, ease: 'power2.inOut' });
     if (p !== undefined) p.catch(function () { revealInvitation(); });
+    startMusicOnOpen();
   }
 
   envScreen.addEventListener('click', openEnvelope);
