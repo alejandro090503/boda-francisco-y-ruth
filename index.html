@@ -406,7 +406,10 @@ section>*{position:relative;z-index:1}
   background:
     radial-gradient(ellipse at 50% 30%,rgba(74,130,176,.06),transparent 50%),
     linear-gradient(180deg,var(--ink2),#081220);
+  position:relative;overflow:hidden;
 }
+.dc-sparkles{position:absolute;inset:0;pointer-events:none;z-index:0}
+#dresscode>*:not(.dc-sparkles){position:relative;z-index:1}
 .dc-sub{
   text-align:center;font-size:clamp(13px,3.4vw,15px);
   color:var(--cream);opacity:.6;line-height:1.9;margin:16px 0 clamp(28px,7vw,36px);
@@ -414,10 +417,10 @@ section>*{position:relative;z-index:1}
 .palette{display:flex;justify-content:center;flex-wrap:wrap;gap:18px;margin-bottom:clamp(24px,6vw,34px)}
 .pal-item{text-align:center;cursor:pointer}
 .pal-sw{
-  width:clamp(48px,13vw,58px);height:clamp(48px,13vw,58px);border-radius:50%;
-  margin:0 auto 8px;
-  border:2px solid rgba(255,255,255,.08);
-  box-shadow:0 6px 20px rgba(0,0,0,.35),0 0 0 1px rgba(74,130,176,.1);
+  width:clamp(32px,9vw,40px);height:clamp(32px,9vw,40px);border-radius:50%;
+  margin:0 auto 6px;
+  border:2px solid rgba(255,255,255,.12);
+  box-shadow:0 4px 14px rgba(0,0,0,.35),0 0 0 1px rgba(74,130,176,.1);
   will-change:transform;
   transition:transform .2s var(--spring),box-shadow .2s;
 }
@@ -1016,6 +1019,7 @@ section>*{position:relative;z-index:1}
 
 <!-- 9. DRESS CODE -->
 <section id="dresscode">
+  <canvas class="dc-sparkles" id="dcSparkles"></canvas>
   <span class="lbl">Vestimenta</span>
   <h2 class="ttl">Código de Vestimenta</h2>
   <div class="gline"></div>
@@ -1035,8 +1039,11 @@ section>*{position:relative;z-index:1}
   <p style="margin-top:24px;font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:clamp(11px,3vw,14px);letter-spacing:.16em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:12px">Colores a evitar</p>
   <div class="palette" id="palette">
     <div class="pal-item"><div class="pal-sw" style="background:#FFFFFF;border-color:rgba(74,130,176,.3)"></div><p class="pal-nm">Blanco</p></div>
-    <div class="pal-item"><div class="pal-sw" style="background:#FF0000;border-color:rgba(74,130,176,.3)"></div><p class="pal-nm">Rojo</p></div>
-    <div class="pal-item"><div class="pal-sw" style="background:#FF00FF;border-color:rgba(74,130,176,.3)"></div><p class="pal-nm">Fucsia</p></div>
+    <div class="pal-item"><div class="pal-sw" style="background:#ff0000;border-color:rgba(74,130,176,.3)"></div><p class="pal-nm">Rojo</p></div>
+    <div class="pal-item"><div class="pal-sw" style="background:#ff00ff;border-color:rgba(74,130,176,.3)"></div><p class="pal-nm">Magenta</p></div>
+    <div class="pal-item"><div class="pal-sw" style="background:#ffff00;border-color:rgba(74,130,176,.3)"></div><p class="pal-nm">Amarillo</p></div>
+    <div class="pal-item"><div class="pal-sw" style="background:#00ffff;border-color:rgba(74,130,176,.3)"></div><p class="pal-nm">Cian</p></div>
+    <div class="pal-item"><div class="pal-sw" style="background:#00ff00;border-color:rgba(74,130,176,.3)"></div><p class="pal-nm">Verde</p></div>
   </div>
   <p style="margin-top:8px;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(12px,3.2vw,15px);color:var(--cream);opacity:.6;line-height:1.65;max-width:300px;margin-left:auto;margin-right:auto;text-align:center">Reservamos estos tonos para la novia. ¡Gracias por respetarlos!</p>
 </section>
@@ -1435,6 +1442,47 @@ function scrollAnims() {
       gsap.to('.pal-sw', { scale: 1, duration: .6, stagger: .1, ease: 'back.out(2.2)' });
     }
   });
+
+  /* Dresscode sparkle dust particles */
+  (function(){
+    var cvs=document.getElementById('dcSparkles');if(!cvs)return;
+    var ctx=cvs.getContext('2d'),particles=[],count=45,running=false;
+    function resize(){var s=cvs.parentElement;cvs.width=s.offsetWidth;cvs.height=s.offsetHeight;}
+    resize();window.addEventListener('resize',resize);
+    function rand(a,b){return a+Math.random()*(b-a);}
+    function spawn(){
+      return{x:rand(0,cvs.width),y:cvs.height+rand(10,40),r:rand(1,2.8),
+        speed:rand(.15,.45),drift:rand(-.12,.12),
+        alpha:rand(.25,.7),pulse:rand(.005,.015),
+        phase:rand(0,Math.PI*2),life:0,maxLife:rand(300,700)};
+    }
+    for(var i=0;i<count;i++){var p=spawn();p.y=rand(0,cvs.height);p.life=rand(0,p.maxLife);particles.push(p);}
+    function draw(){
+      if(!running)return;
+      ctx.clearRect(0,0,cvs.width,cvs.height);
+      for(var i=0;i<particles.length;i++){
+        var p=particles[i];
+        p.y-=p.speed;p.x+=p.drift;p.life++;
+        p.phase+=p.pulse;
+        var a=p.alpha*(0.5+0.5*Math.sin(p.phase));
+        var fade=1;
+        if(p.life<40)fade=p.life/40;
+        if(p.life>p.maxLife-60)fade=Math.max(0,(p.maxLife-p.life)/60);
+        a*=fade;
+        if(p.y<-10||p.life>=p.maxLife){particles[i]=spawn();continue;}
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle='rgba(74,130,176,'+a+')';
+        ctx.shadowBlur=p.r*4;ctx.shadowColor='rgba(139,181,212,.5)';
+        ctx.fill();
+        ctx.shadowBlur=0;
+      }
+      requestAnimationFrame(draw);
+    }
+    ScrollTrigger.create({trigger:'#dresscode',start:'top bottom',end:'bottom top',
+      onEnter:function(){running=true;draw();},onLeave:function(){running=false;},
+      onEnterBack:function(){running=true;draw();},onLeaveBack:function(){running=false;}});
+  })();
 
   gsap.from('.fam-ttl', {
     opacity: 0, y: 20, duration: .65, stagger: .2, ease,
