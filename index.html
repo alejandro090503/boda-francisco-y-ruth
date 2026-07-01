@@ -538,32 +538,6 @@ section>*{position:relative;z-index:1}
 .rsvp-greeting{font-family:'Cormorant Garamond',serif;font-size:clamp(20px,5.5vw,24px);color:var(--gold);text-align:center;margin-bottom:8px}
 .rsvp-passes{font-size:clamp(12px,3.2vw,14px);color:var(--cream);opacity:.55;text-align:center;margin-bottom:28px}
 
-/* ── KIDS POLICY ───────────────────────── */
-#kids-policy{
-  background:
-    radial-gradient(ellipse at 30% 70%,rgba(201,169,110,.05),transparent 50%),
-    linear-gradient(180deg,var(--ink2),#12110a);
-}
-.kp-card{
-  background:linear-gradient(160deg,rgba(34,32,24,.5),rgba(20,18,12,.4));
-  border:1px solid var(--card-border);
-  border-radius:14px;padding:clamp(28px,7vw,40px) clamp(20px,5vw,28px) clamp(24px,6vw,32px);
-  margin-top:clamp(22px,6vw,30px);text-align:center;
-  position:relative;overflow:hidden;
-  box-shadow:0 8px 28px rgba(0,0,0,.25),inset 0 1px 0 rgba(201,169,110,.06);
-}
-.kp-card::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent)}
-.kp-icons{display:flex;justify-content:center;gap:clamp(22px,6vw,32px);margin-bottom:clamp(18px,5vw,26px);color:var(--gold);opacity:.75}
-.kp-icons svg{width:clamp(26px,7vw,32px);height:clamp(26px,7vw,32px)}
-.kp-msg{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(15px,4.2vw,18px);line-height:1.9;
-  color:var(--cream);opacity:.8;font-style:italic;
-}
-.kp-note{
-  font-size:clamp(9px,2.4vw,11px);letter-spacing:clamp(2px,.7vw,4px);
-  text-transform:uppercase;color:var(--gold);opacity:.55;margin-top:clamp(14px,4vw,22px);
-}
 
 /* ── GIFTS ─────────────────────────────── */
 #gifts{
@@ -902,21 +876,6 @@ section>*{position:relative;z-index:1}
 </section>
 
 
-<!-- 6. KIDS POLICY -->
-<section id="kids-policy">
-  <span class="lbl">Con todo nuestro cariño</span>
-  <h2 class="ttl">Solo Adultos</h2>
-  <div class="gline"></div>
-  <div class="kp-card">
-    <div class="kp-icons">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M5 12v7a1 1 0 001 1h12a1 1 0 001-1v-7M8 12V8a4 4 0 018 0v4"/><line x1="4" y1="4" x2="20" y2="20"/></svg>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l-1 9a4 4 0 01-6 0L8 2zM12 11v9M8 22h8"/></svg>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
-    </div>
-    <p class="kp-msg">Queremos que vivas esta noche<br>sin preocupaciones. Con mucho cariño,<br>te pedimos dejar a los pequeños en casa.</p>
-    <p class="kp-note">Una velada de adultos · Gracias por comprender</p>
-  </div>
-</section>
 
 
 <!-- 7. MESA DE REGALOS -->
@@ -1023,7 +982,7 @@ section>*{position:relative;z-index:1}
   <span class="lbl">Vestimenta</span>
   <h2 class="ttl">Código de Vestimenta</h2>
   <div class="gline"></div>
-  <p class="dc-sub"><em style="font-family:'Cormorant Garamond',serif;font-size:clamp(16px,4.5vw,19px);font-weight:400">Formal</em><br>Ayúdanos a crear un ambiente especial<br>vistiéndote acorde a la ocasión.</p>
+  <p class="dc-sub" style="font-family:'Great Vibes',cursive;font-size:clamp(32px,9vw,48px);color:#fff;opacity:1;line-height:1.3;letter-spacing:1px">All in black</p>
 
   <div class="dc-cols" id="dcCols">
     <div class="dc-col">
@@ -1296,7 +1255,6 @@ function initBgOrbs() {
     { sel:'#family',     orbs:[{x:'70%',y:'30%',w:160,c:'rgba(180,150,80,.10)',a:'orbFloat1',d:'18s'},{x:'25%',y:'75%',w:140,c:'rgba(201,169,110,.09)',a:'orbFloat3',d:'22s'}] },
     { sel:'#gallery',    orbs:[{x:'20%',y:'25%',w:190,c:'rgba(190,160,90,.13)',a:'orbFloat3',d:'15s'},{x:'80%',y:'60%',w:150,c:'rgba(201,169,110,.10)',a:'orbFloat1',d:'19s'},{x:'50%',y:'90%',w:110,c:'rgba(150,125,70,.08)',a:'orbFloat2',d:'23s'}] },
     { sel:'#rsvp',       orbs:[{x:'75%',y:'35%',w:170,c:'rgba(201,169,110,.11)',a:'orbFloat2',d:'17s'},{x:'20%',y:'70%',w:130,c:'rgba(170,140,75,.09)',a:'orbFloat1',d:'21s'}] },
-    { sel:'#kids-policy',orbs:[{x:'30%',y:'40%',w:140,c:'rgba(201,169,110,.10)',a:'orbFloat1',d:'16s'},{x:'70%',y:'80%',w:160,c:'rgba(155,130,72,.11)',a:'orbFloat3',d:'20s'}] },
     { sel:'#gifts',      orbs:[{x:'80%',y:'25%',w:180,c:'rgba(180,150,80,.12)',a:'orbFloat3',d:'18s'},{x:'15%',y:'65%',w:140,c:'rgba(201,169,110,.09)',a:'orbFloat2',d:'22s'}] },
     { sel:'#album',      orbs:[{x:'25%',y:'30%',w:160,c:'rgba(190,160,90,.10)',a:'orbFloat2',d:'17s'},{x:'70%',y:'75%',w:130,c:'rgba(201,169,110,.08)',a:'orbFloat1',d:'21s'}] },
     { sel:'#footer',     orbs:[{x:'50%',y:'30%',w:200,c:'rgba(201,169,110,.12)',a:'orbFloat1',d:'16s'},{x:'20%',y:'70%',w:150,c:'rgba(150,125,70,.09)',a:'orbFloat3',d:'20s'}] }
@@ -1491,11 +1449,6 @@ function scrollAnims() {
   gsap.from('.fam-card', {
     opacity: 0, y: 24, duration: .6, stagger: .1, ease,
     scrollTrigger: { trigger: '#family', start: 'top 78%', once: true }
-  });
-
-  gsap.from('.kp-card', {
-    opacity: 0, y: 28, duration: .75, ease,
-    scrollTrigger: { trigger: '#kids-policy', start: 'top 82%', once: true }
   });
 
   gsap.from('.gf-card', {
